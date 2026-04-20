@@ -30,6 +30,6 @@ jobs:
             --frontend=dockerfile.v0 \
             --local context=./backend \
             --local dockerfile=./backend \
-            --output type=image,name=${{ secrets.REPOSITORY_URI }}/nodejsmysql:${{ github.sha }},push=true \
+            --output type=image,name=${{ secrets.REPOSITORY_URI }}/nodejsmysql:${{ github.sha }},push=true,compression=gzip,force-compression=true \
             --export-cache type=registry,ref=${{ secrets.REPOSITORY_URI }}/nodejsmysql:buildcache,mode=max \
             --import-cache type=registry,ref=${{ secrets.REPOSITORY_URI }}/nodejsmysql:buildcache
