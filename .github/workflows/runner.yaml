@@ -30,19 +30,19 @@ jobs:
         with:
           # Leave 'registry' blank for Docker Hub,
           # or set to 'my-private-registry.com'
-          registry: ${{ secrets.DOCKER_REGISTRY_URL }}
+          registry: ${{ secrets.REPOSITORY_URI }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./backend
           push: true
           # Update tags to your registry format
           tags: |
-            ${{ secrets.DOCKER_REGISTRY_URL }}/myapp:${{ github.sha }}
-            ${{ secrets.DOCKER_REGISTRY_URL }}/myapp:latest
+            ${{ secrets.REPOSITORY_URI }}/nodejsmysql:${{ github.sha }}
+            ${{ secrets.REPOSITORY_URI }}/nodejsmysql:latest
           # Cache settings updated for Docker Registry
-          cache-from: type=registry,ref=${{ secrets.DOCKER_REGISTRY_URL }}/myapp:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_REGISTRY_URL }}/myapp:buildcache,mode=max
+          cache-from: type=registry,ref=${{ secrets.REPOSITORY_URI }}/nodejsmysql:buildcache
+          cache-to: type=registry,ref=${{ secrets.REPOSITORY_URI }}/nodejsmysql:buildcache,mode=max
