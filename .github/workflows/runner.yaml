@@ -15,7 +15,9 @@ jobs:
       - name: Install buildctl
         run: |
           curl -sSL https://github.com/moby/buildkit/releases/download/v0.12.0/buildkit-v0.12.0.linux-amd64.tar.gz \
-            | tar -xz -C /usr/local/bin --strip-components=1 bin/buildctl
+            | tar -xz -C /tmp --strip-components=1 bin/buildctl
+          chmod +x /tmp/buildctl
+          echo "/tmp" >> $GITHUB_PATH
 
       - name: Login to registry
         run: |
